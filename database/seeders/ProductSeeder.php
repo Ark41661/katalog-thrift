@@ -2,25 +2,263 @@
 
 namespace Database\Seeders;
 
+use App\Models\Partner;
 use App\Models\Product;
 use Illuminate\Database\Seeder;
 
 class ProductSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        $products = config('catalog.products');
+        $partners = Partner::all()->keyBy('store_slug');
 
-        if ($products) {
-            foreach ($products as $productData) {
-                Product::firstOrCreate(
-                    ['slug' => $productData['slug']],
-                    $productData
-                );
-            }
+        $products = [
+            // ─── Vintage Vault (hoodies & jackets) ───
+            [
+                'partner' => 'vintage-vault',
+                'slug' => 'vv-dickies-navy',
+                'name' => 'Dickies Essential Hoodie Navy',
+                'brand' => 'Dickies',
+                'product_type' => 'hoodie',
+                'color' => 'Navy',
+                'color_hex' => '#1a2744',
+                'price' => 235000,
+                'size' => 'L',
+                'condition' => '9/10',
+                'description' => 'Hoodie Dickies premium warna navy. Bahan fleece tebal, hanging tag masih ada. Kondisi 9/10 layak pakai.',
+                'image' => 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=80',
+            ],
+            [
+                'partner' => 'vintage-vault',
+                'slug' => 'vv-carhartt-black',
+                'name' => 'Carhartt Pullover Hoodie Black',
+                'brand' => 'Carhartt',
+                'product_type' => 'hoodie',
+                'color' => 'Black',
+                'color_hex' => '#1a1a1a',
+                'price' => 275000,
+                'size' => 'M',
+                'condition' => '9/10',
+                'description' => 'Carhartt hoodie hitam klasik. Logo kecil di dada. Bahan heavyweight masih sangat tebal.',
+                'image' => 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?auto=format&fit=crop&w=900&q=80',
+            ],
+            [
+                'partner' => 'vintage-vault',
+                'slug' => 'vv-nike-windrunner',
+                'name' => 'Nike Windrunner Jacket Red',
+                'brand' => 'Nike',
+                'product_type' => 'jacket',
+                'color' => 'Red',
+                'color_hex' => '#cc2222',
+                'price' => 325000,
+                'size' => 'L',
+                'condition' => '8.5/10',
+                'description' => 'Nike Windrunner original. Ikonik dengan garis hitam-putih. Kondisi mulus, resleting lancar.',
+                'image' => 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=900&q=80',
+            ],
+            [
+                'partner' => 'vintage-vault',
+                'slug' => 'vv-adicolor-navy',
+                'name' => 'Adidas Adicolor Hoodie Navy',
+                'brand' => 'Adidas',
+                'product_type' => 'hoodie',
+                'color' => 'Navy',
+                'color_hex' => '#1a2744',
+                'price' => 215000,
+                'size' => 'XL',
+                'condition' => '8.8/10',
+                'description' => 'Adicolor hoodie biru navy. Model classic trefoil logo. Cocok buat daily hangout.',
+                'image' => 'https://images.unsplash.com/photo-1618354691551-44de113f0164?auto=format&fit=crop&w=900&q=80',
+            ],
+
+            // ─── Street Collective (streetwear + sneakers) ───
+            [
+                'partner' => 'street-collective',
+                'slug' => 'sc-stussy-grey',
+                'name' => 'Stussy Stock Hoodie Grey',
+                'brand' => 'Stussy',
+                'product_type' => 'hoodie',
+                'color' => 'Grey',
+                'color_hex' => '#a0a0a0',
+                'price' => 295000,
+                'size' => 'L',
+                'condition' => '9.2/10',
+                'description' => 'Stussy hoodie abu-abu original. Cotton fleece 400gsm. Embossed logo depan.',
+                'image' => 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=900&q=80',
+            ],
+            [
+                'partner' => 'street-collective',
+                'slug' => 'sc-nike-af1',
+                'name' => 'Nike Air Force 1 White',
+                'brand' => 'Nike',
+                'product_type' => 'shoes',
+                'color' => 'White',
+                'color_hex' => '#f5f5f5',
+                'price' => 550000,
+                'size' => '42',
+                'condition' => '8.5/10',
+                'description' => 'AF1 putih klasik ukuran 42. Outsole masih bagus, insole original. Wajib punya.',
+                'image' => 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=900&q=80',
+            ],
+            [
+                'partner' => 'street-collective',
+                'slug' => 'sc-champion-black',
+                'name' => 'Champion Reverse Weave Black',
+                'brand' => 'Champion',
+                'product_type' => 'hoodie',
+                'color' => 'Black',
+                'color_hex' => '#1a1a1a',
+                'price' => 285000,
+                'size' => 'XL',
+                'condition' => '9/10',
+                'description' => 'Champion Reverse Weave hitam. Holy grail hoodie. Bahan tebal, ribbing masih kencang.',
+                'image' => 'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=80',
+            ],
+            [
+                'partner' => 'street-collective',
+                'slug' => 'sc-newera-yankees',
+                'name' => 'New Era Yankees Cap Black',
+                'brand' => 'New Era',
+                'product_type' => 'hat',
+                'color' => 'Black',
+                'color_hex' => '#1a1a1a',
+                'price' => 185000,
+                'size' => 'All Size',
+                'condition' => '9/10',
+                'description' => 'New Era 59FIFTY Yankees black. Original, visor masih kaku, box included.',
+                'image' => 'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&w=900&q=80',
+            ],
+            [
+                'partner' => 'street-collective',
+                'slug' => 'sc-vans-old-skool',
+                'name' => 'Vans Old Skool Black/White',
+                'brand' => 'Vans',
+                'product_type' => 'shoes',
+                'color' => 'Black/White',
+                'color_hex' => '#1a1a1a',
+                'price' => 420000,
+                'size' => '41',
+                'condition' => '8.8/10',
+                'description' => 'Vans Old Skool hitam putih ukuran 41. Karet samping masih mulus, tali original.',
+                'image' => 'https://images.unsplash.com/photo-1525966222134-fcfa99b0f3b9?auto=format&fit=crop&w=900&q=80',
+            ],
+
+            // ─── Thrift & Co (casual, office, date) ───
+            [
+                'partner' => 'thrift-and-co',
+                'slug' => 'tc-uniqlo-oxford',
+                'name' => 'Uniqlo Oxford Shirt Blue',
+                'brand' => 'Uniqlo',
+                'product_type' => 'shirt',
+                'color' => 'Light Blue',
+                'color_hex' => '#7ea8c4',
+                'price' => 145000,
+                'size' => 'M',
+                'condition' => '9/10',
+                'description' => 'Oxford shirt Uniqlo biru muda. Bahan katun rapi, cocok buat kerja atau hangout.',
+                'image' => 'https://images.unsplash.com/photo-1598033129183-c4f50c736e10?auto=format&fit=crop&w=900&q=80',
+            ],
+            [
+                'partner' => 'thrift-and-co',
+                'slug' => 'tc-uniqlo-chino',
+                'name' => 'Uniqlo Chino Pants Beige',
+                'brand' => 'Uniqlo',
+                'product_type' => 'pants',
+                'color' => 'Beige',
+                'color_hex' => '#d4c5a9',
+                'price' => 165000,
+                'size' => '32',
+                'condition' => '9/10',
+                'description' => 'Chino Uniqlo warna beige ukuran 32. Pas buat padu-padan sama kemeja atau kaos.',
+                'image' => 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=900&q=80',
+            ],
+            [
+                'partner' => 'thrift-and-co',
+                'slug' => 'tc-zara-blazer',
+                'name' => 'Zara Blazer Black Slim Fit',
+                'brand' => 'Zara',
+                'product_type' => 'jacket',
+                'color' => 'Black',
+                'color_hex' => '#1a1a1a',
+                'price' => 285000,
+                'size' => 'L',
+                'condition' => '9/10',
+                'description' => 'Blazer Zara hitam slim fit. Cocok buat kondangan atau interview. Masih sangat rapi.',
+                'image' => 'https://images.unsplash.com/photo-1593030761757-71fae45fa0e7?auto=format&fit=crop&w=900&q=80',
+            ],
+            [
+                'partner' => 'thrift-and-co',
+                'slug' => 'tc-hm-dress',
+                'name' => 'H&M Midi Dress Floral',
+                'brand' => 'H&M',
+                'product_type' => 'other',
+                'color' => 'Multi Floral',
+                'color_hex' => '#c4708a',
+                'price' => 175000,
+                'size' => 'S',
+                'condition' => '8.9/10',
+                'description' => 'Midi dress H&M motif floral. Model A-line, cocok buat date atau hangout santai.',
+                'image' => 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=900&q=80',
+            ],
+            [
+                'partner' => 'thrift-and-co',
+                'slug' => 'tc-mango-knit',
+                'name' => 'Mango Knit Sweater Cream',
+                'brand' => 'Mango',
+                'product_type' => 'tshirt',
+                'color' => 'Cream',
+                'color_hex' => '#f5e6d3',
+                'price' => 155000,
+                'size' => 'M',
+                'condition' => '9.1/10',
+                'description' => 'Sweater rajut Mango warna cream. Lembut & hangat. Padukan dengan chino atau jeans.',
+                'image' => 'https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?auto=format&fit=crop&w=900&q=80',
+            ],
+            [
+                'partner' => 'thrift-and-co',
+                'slug' => 'tc-guess-bag',
+                'name' => 'Guess Shoulder Bag Brown',
+                'brand' => 'Guess',
+                'product_type' => 'bag',
+                'color' => 'Brown',
+                'color_hex' => '#8b6c42',
+                'price' => 245000,
+                'size' => 'One Size',
+                'condition' => '8.5/10',
+                'description' => 'Tas selempang Guess kulit sintetis cokelat. Logo gold plate. Masih elegan.',
+                'image' => 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=900&q=80',
+            ],
+            [
+                'partner' => 'thrift-and-co',
+                'slug' => 'tc-gucci-scarf',
+                'name' => 'Gucci Print Silk Scarf',
+                'brand' => 'Gucci',
+                'product_type' => 'scarf',
+                'color' => 'Multi',
+                'color_hex' => '#c4a35a',
+                'price' => 385000,
+                'size' => '90x90cm',
+                'condition' => '9/10',
+                'description' => 'Syal sutra Gucci original. Motif GG print. Kondisi sangat terawat, no loose thread.',
+                'image' => 'https://images.unsplash.com/photo-1601924994987-69e26d50dc26?auto=format&fit=crop&w=900&q=80',
+            ],
+        ];
+
+        foreach ($products as $data) {
+            $partnerSlug = $data['partner'];
+            unset($data['partner']);
+
+            if (!isset($partners[$partnerSlug])) continue;
+
+            Product::firstOrCreate(
+                ['slug' => $data['slug']],
+                array_merge($data, [
+                    'partner_id' => $partners[$partnerSlug]->id,
+                    'is_active' => true,
+                    'is_new_arrival' => true,
+                    'stock' => 1,
+                ])
+            );
         }
     }
 }
