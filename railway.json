@@ -1,1 +1,10 @@
-{}
+{
+  "$schema": "https://railway.com/railway.schema.json",
+  "deploy": {
+    "healthcheckPath": "/",
+    "restartPolicyType": "ON_FAILURE",
+    "variables": {
+      "RAILPACK_PHP_VERSION": "8.3"
+    }
+  }
+}
