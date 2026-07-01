@@ -1,0 +1,5 @@
+- **Layering**: Follows standard Laravel MVC with Controllers (`app/Http/Controllers`), Eloquent Models (`app/Models`), and Blade Views (`resources/views`).
+- **Role-Based Segmentation**: Logic is strictly partitioned by user role via dedicated controller namespaces (`Member\`, `Partner\`, `Admin\`) and custom middleware (`EnsureMemberAuthenticated`, `EnsurePartnerAuthenticated`, `EnsureAdminAuthenticated`).
+- **Authentication Strategy**: Uses Laravel Session Auth for Members and Partners (via `partner` guard in `config/auth.php`), while Admin authentication is implemented via simple session-based credential checking against `config/admin.php` values.
+- **Entry Points**: `routes/web.php` defines all public and protected routes, grouping partner and admin routes under specific prefixes and middleware. `app/Http/Kernel.php` registers the custom middleware aliases.
+- **Data Model**: Central `User` model handles members and partner accounts (linked via `partner_id`), while `Partner`, `Product`, `Outfit`, and `Review` models manage core marketplace entities.

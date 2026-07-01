@@ -1,0 +1,1 @@
+A Laravel-based multi-vendor thrift marketplace enabling members, partners, and admins to manage products, outfits, and community interactions.

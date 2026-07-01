@@ -1,0 +1,1 @@
+Laravel 10.x with PHP 8.1+, Laravel Sanctum for API token support, and Vite for asset bundling.

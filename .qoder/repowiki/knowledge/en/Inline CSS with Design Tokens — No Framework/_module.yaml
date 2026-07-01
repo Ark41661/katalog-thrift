@@ -1,0 +1,16 @@
+schema_version: 1
+module_path: frontend_style
+title: Inline CSS with Design Tokens — No Framework
+scope: []
+source_files:
+    - resources/views/public/landing.blade.php
+    - resources/views/partials/public-nav-styles.blade.php
+    - resources/views/catalog/index.blade.php
+    - resources/views/catalog/about.blade.php
+    - resources/views/admin/dashboard.blade.php
+    - resources/views/member/login.blade.php
+    - resources/css/app.css
+    - package.json
+    - vite.config.js
+depends_on: []
+related_to: []

@@ -1,0 +1,15 @@
+schema_version: 1
+module_path: error_handling
+title: Laravel Standard Exception Handling with Validation-Centric Error Flow
+scope: []
+source_files:
+    - app/Exceptions/Handler.php
+    - app/Http/Controllers/Controller.php
+    - app/Http/Kernel.php
+    - app/Http/Middleware/EnsurePartnerAuthenticated.php
+    - app/Http/Controllers/AdminArticleController.php
+    - app/Http/Controllers/Partner/PartnerAuthController.php
+    - app/Http/Controllers/Member/MemberAuthController.php
+    - bootstrap/app.php
+depends_on: []
+related_to: []

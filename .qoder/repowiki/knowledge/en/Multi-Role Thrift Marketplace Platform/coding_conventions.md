@@ -1,0 +1,4 @@
+- Controllers consistently pass a `storeName` variable derived from `config('catalog.store_name')` to Blade views for consistent branding.
+- Partner-scoped controllers use a private `partner()` helper method to retrieve the authenticated partner's model instance from `auth('partner')->user()->partner`.
+- Resource controllers enforce ownership checks using `abort_if($model->partner_id !== $this->partner()->id, 403)` before performing update or destroy operations.
+- Admin authentication relies on a custom session flag `is_admin_authenticated` managed by `AdminAuthController` and checked by `EnsureAdminAuthenticated` middleware.

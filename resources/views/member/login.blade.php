@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Member - {{ config('catalog.store_name') }}</title>
+    <style>
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{font-family:-apple-system,"Helvetica Neue",Arial,sans-serif;background:#f3f4f6;min-height:100vh;display:grid;place-items:center;}
+        .card{width:min(420px,94%);background:#fff;border:1px solid #e5e7eb;padding:32px;}
+        .logo{font-size:22px;font-weight:900;letter-spacing:2px;color:#111827;margin-bottom:6px;}
+        .sub{font-size:14px;color:#6b7280;margin-bottom:24px;}
+        label{display:block;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#374151;margin-bottom:6px;margin-top:16px;}
+        input{width:100%;padding:11px 12px;border:1px solid #d1d5db;font-size:14px;font-family:inherit;}
+        input:focus{outline:2px solid #111827;outline-offset:-2px;}
+        .btn{width:100%;padding:12px;background:#111827;color:#fff;border:0;font-size:14px;font-weight:700;cursor:pointer;margin-top:20px;}
+        .btn:hover{background:#374151;}
+        .error{background:#fee2e2;color:#991b1b;padding:10px 12px;font-size:13px;margin-bottom:16px;}
+        .links{margin-top:16px;text-align:center;font-size:13px;color:#6b7280;}
+        .links a{color:#111827;font-weight:700;}
+        .divider{border:0;border-top:1px solid #e5e7eb;margin:20px 0;}
+        .partner-link{display:block;text-align:center;padding:11px;border:1px solid #e5e7eb;font-size:13px;font-weight:600;color:#374151;text-decoration:none;margin-top:12px;}
+        .partner-link:hover{background:#f9fafb;}
+        .google-btn{width:100%;padding:12px;background:#fff;color:#374151;border:1px solid #d1d5db;font-size:14px;font-weight:700;cursor:pointer;margin-top:12px;display:inline-flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;}
+        .google-btn:hover{background:#f9fafb;}
+        .google-btn svg{width:18px;height:18px;}
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="logo">{{ config('catalog.store_name') }}</div>
+        <p class="sub">Login untuk memberikan review produk</p>
+
+        @if($errors->any())
+            <div class="error">{{ $errors->first() }}</div>
+        @endif
+        @if(session('success'))
+            <div style="background:#dcfce7;color:#166534;padding:10px 12px;font-size:13px;margin-bottom:16px;">{{ session('success') }}</div>
+        @endif
+
+        <form method="POST" action="{{ route('member.login.submit') }}">
+            @csrf
+            <label>Email</label>
+            <input type="email" name="email" value="{{ old('email') }}" required autofocus>
+            <label>Password</label>
+            <input type="password" name="password" required>
+            <div style="text-align:right;margin-top:6px;">
+                <a href="{{ route('member.forgot') }}" style="font-size:12px;color:#6b7280;font-weight:600;">Lupa password?</a>
+            </div>
+            <button type="submit" class="btn">Masuk</button>
+        </form>
+
+        <hr class="divider">
+        <a href="{{ route('google.redirect') }}" class="google-btn">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+            Masuk dengan Google
+        </a>
+
+        <div class="links">
+            Belum punya akun? <a href="{{ route('member.register') }}">Daftar sekarang</a>
+        </div>
+
+        <hr class="divider">
+        <a href="{{ route('partner.login') }}" class="partner-link">🏪 Login sebagai Mitra Toko</a>
+        <div class="links" style="margin-top:10px;">
+            <a href="{{ route('catalog.index') }}">← Kembali ke katalog</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+schema_version: 1
+module_path: configuration_system
+title: Laravel Configuration System with Environment-Based Layering
+scope: []
+source_files:
+    - .env.example
+    - bootstrap/app.php
+    - config/app.php
+    - config/database.php
+    - config/filesystems.php
+    - config/catalog.php
+    - config/admin.php
+    - config/brands.php
+    - config/services.php
+depends_on: []
+related_to: []

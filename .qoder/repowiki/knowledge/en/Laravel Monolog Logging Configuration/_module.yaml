@@ -1,0 +1,12 @@
+schema_version: 1
+module_path: logging_system
+title: Laravel Monolog Logging Configuration
+scope: []
+source_files:
+    - config/logging.php
+    - app/Exceptions/Handler.php
+    - .env.example
+    - app/Models/ActivityLog.php
+    - storage/logs/laravel.log
+depends_on: []
+related_to: []
