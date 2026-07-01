@@ -8,15 +8,27 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->string('meta_title')->nullable()->after('story');
-            $table->text('meta_description')->nullable()->after('meta_title');
-            $table->string('meta_keywords')->nullable()->after('meta_description');
-            $table->integer('total_views')->default(0)->after('is_new_arrival');
-            $table->integer('total_wa_clicks')->default(0)->after('total_views');
+            if (!Schema::hasColumn('products', 'meta_title')) {
+                $table->string('meta_title')->nullable()->after('story');
+            }
+            if (!Schema::hasColumn('products', 'meta_description')) {
+                $table->text('meta_description')->nullable()->after('meta_title');
+            }
+            if (!Schema::hasColumn('products', 'meta_keywords')) {
+                $table->string('meta_keywords')->nullable()->after('meta_description');
+            }
+            if (!Schema::hasColumn('products', 'total_views')) {
+                $table->integer('total_views')->default(0)->after('is_new_arrival');
+            }
+            if (!Schema::hasColumn('products', 'total_wa_clicks')) {
+                $table->integer('total_wa_clicks')->default(0)->after('total_views');
+            }
         });
 
-        // Fulltext index for search
-        DB::statement('ALTER TABLE products ADD FULLTEXT search_fulltext (name, brand, description)');
+        // Fulltext index for MySQL only (not supported on SQLite)
+        if (DB::connection()->getDriverName() === 'mysql') {
+            DB::statement('ALTER TABLE products ADD FULLTEXT search_fulltext (name, brand, description)');
+        }
     }
 
     public function down(): void
@@ -24,6 +36,8 @@ return new class extends Migration
         Schema::table('products', function (Blueprint $table) {
             $table->dropColumn(['meta_title', 'meta_description', 'meta_keywords', 'total_views', 'total_wa_clicks']);
         });
-        DB::statement('ALTER TABLE products DROP INDEX search_fulltext');
+        if (DB::connection()->getDriverName() === 'mysql') {
+            DB::statement('ALTER TABLE products DROP INDEX search_fulltext');
+        }
     }
 };
